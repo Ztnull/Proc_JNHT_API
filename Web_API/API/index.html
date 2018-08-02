@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>接口</title>
+    <meta charset="utf-8" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <!--<script src="Scripts/jquery-3.3.1.min.js"></script>-->
+</head>
+<body>
+    <input id="tests" type="button" value="点击发送数据" />
+  
+    <div id="ss"></div>
+    <script>
+
+        $(document).ready(function () {
+            //请求路径
+            //http://219.234.2.33:8098/
+            var uri = 'http://localhost:65510/ActionApi/Home/StoreSaleData';
+            //
+
+            //传递参数
+            var hbre = {
+                datetime: "1516688369",
+                sign: "cf80a7d9e337c222412063a1645a17f3",
+                Id: 2,
+                username: "jnht2018",
+                password: "2018-07-171211",
+                stoken: '33436stokensysgcaich'
+            };
+
+            $("#tests").click(function () {
+
+
+                $.ajax({
+                    url: uri,
+                    type: "post",
+                    data: JSON.stringify(hbre),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (data) {
+                        alert(JSON.stringify(data));
+                        $("#ss").html(JSON.stringify(data));
+                    }, error: function (data) {
+                        alert(JSON.stringify(data));
+                    }
+
+                });
+            });
+        });
+    </script>
+</body>
+</html>

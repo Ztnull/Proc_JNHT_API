@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>商城接口</title>
+    <meta charset="utf-8" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+</head>
+<body>
+    <input id="tests" type="button" value="点击发送数据" />
+    <br />
+    <br />
+    <br />
+    <br />
+    <input type="text" id="txt" />
+    <div id="ss"></div>
+    <script>
+
+        $(document).ready(function () {
+            //请求路径
+
+            var uri = '/actionapi/Default/SaleAmount';
+
+            //传递参数
+            var hbre = {
+                datetime: "1516688369",
+                sign: "cf80a7d9e337c222412063a1645a17f3",
+                Id: 2,
+                username:"jnht2018",
+                password: "2018-07-171211",
+                stoken: '33436stokensysgcaich'
+            };
+
+            $("#tests").click(function () {
+
+
+                $.ajax({
+                    url: uri,
+                    type: "post",
+                    data: JSON.stringify(hbre),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data);
+                        $("#ss").html(JSON.stringify(data));
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
