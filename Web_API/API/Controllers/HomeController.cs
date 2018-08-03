@@ -77,13 +77,13 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage SaleAmount([FromBody]Verification verCode)
         {
-            return R = GetObjAction(verCode, state, delegate
-            {
-                DT = bll.Get12MonthSaleDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
-            });
+            return R = GetObjAction(verCode, state, func = () =>
+              {
+                  DT = bll.Get12MonthSaleDT();
+                  R = COMMON.StringHelper.JsonHelper(DT);
+                  if (DT != null) DT.Clear();
+                  return R;
+              });
         }
 
 
@@ -96,7 +96,7 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage SalesRatio([FromBody]Verification verCode)
         {
-            return R = GetObjAction(verCode, state, delegate
+            return R = GetObjAction(verCode, state, func = () =>
             {
                 DT = bll.GetbrandSaleDT();
                 R = COMMON.StringHelper.JsonHelper(DT);
@@ -116,7 +116,7 @@ namespace API.Controllers
         public HttpResponseMessage CurrInventoryData([FromBody]Verification verCode)
         {
 
-            return R = GetObjAction(verCode, state, delegate
+            return R = GetObjAction(verCode, state, func = () =>
             {
                 DT = bll.GetJSKCDT();
                 R = COMMON.StringHelper.JsonHelper(DT);
@@ -135,7 +135,7 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage StorePurchData([FromBody]Verification verCode)
         {
-            return R = GetObjAction(verCode, state, delegate
+            return R = GetObjAction(verCode, state, func = () =>
             {
                 DT = bll.GetShopInDT();
                 R = COMMON.StringHelper.JsonHelper(DT);
@@ -153,7 +153,7 @@ namespace API.Controllers
         public HttpResponseMessage StoreSaleData([FromBody]Verification verCode)
         {
 
-            return R = GetObjAction(verCode, state, delegate
+            return R = GetObjAction(verCode, state, func = () =>
             {
                 DT = bll.GetShopSaleDT();
                 R = COMMON.StringHelper.JsonHelper(DT);
@@ -171,7 +171,7 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage GetMachineTypeSaleData([FromBody]Verification verCode)
         {
-            return R = GetObjAction<HttpResponseMessage>(verCode, state, delegate
+            return R = GetObjAction<HttpResponseMessage>(verCode, state, func = () =>
             {
                 DT = bll.GetTypeSaleDT();
                 R = COMMON.StringHelper.JsonHelper(DT);
@@ -182,7 +182,7 @@ namespace API.Controllers
 
 
         #region 不使用此方法
-        //Func<HttpResponseMessage> func = new Func<HttpResponseMessage>(delegate ()
+        //Func<HttpResponseMessage> func = new Func<HttpResponseMessage>(func = () => ()
         //{
         //    BLL.ProcBLL bll = new BLL.ProcBLL();
         //    var DT = bll.GetYearMonthLastDaySaleDT();
@@ -201,7 +201,7 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage GetYearMonthLastDaySaleDate([FromBody]Verification verCode)
         {
-            return R = GetObjAction(verCode, state, delegate
+            return R = GetObjAction(verCode, state, func = () =>
              {
                  DT = bll.GetYearMonthLastDaySaleDT();
                  R = COMMON.StringHelper.JsonHelper(DT);
@@ -220,7 +220,7 @@ namespace API.Controllers
         public HttpResponseMessage GetYearSaleData([FromBody]Verification verCode)
         {
             return R = GetObjAction(verCode, state,
-                delegate
+                func = () =>
                 {
                     DT = bll.GetYearSaleDT();
                     R = COMMON.StringHelper.JsonHelper(DT);
@@ -236,7 +236,7 @@ namespace API.Controllers
     public HttpResponseMessage GetDEPMENT([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-            delegate
+            func = () =>
         {
             DT = bll.GetSF_DEPMENT();
             R = COMMON.StringHelper.JsonHelper(DT);
@@ -248,7 +248,7 @@ namespace API.Controllers
     public HttpResponseMessage Getitem([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          delegate
+          func = () =>
      {
          DT = bll.Getsf_item();
          R = COMMON.StringHelper.JsonHelper(DT);
@@ -261,7 +261,7 @@ namespace API.Controllers
     public HttpResponseMessage Getitem_type([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          delegate
+          func = () =>
           {
               DT = bll.Getsf_item_type();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -274,7 +274,7 @@ namespace API.Controllers
     public HttpResponseMessage Getcustomer([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          delegate
+          func = () =>
           {
               DT = bll.Getsf_customer();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -287,7 +287,7 @@ namespace API.Controllers
     public HttpResponseMessage Getsupplier([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          delegate
+          func = () =>
           {
               DT = bll.Getsf_supplier();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -299,7 +299,7 @@ namespace API.Controllers
     public HttpResponseMessage Getpurorder([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          delegate
+          func = () =>
           {
               DT = bll.Getsf_purorder();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -312,7 +312,7 @@ namespace API.Controllers
     public HttpResponseMessage Getsaleissuebill([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          delegate
+          func = () =>
           {
               DT = bll.Getsf_saleissuebill();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -325,7 +325,7 @@ namespace API.Controllers
     public HttpResponseMessage Getpurinwarehsbill([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          delegate
+          func = () =>
           {
               DT = bll.Getsf_purinwarehsbill();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -337,7 +337,7 @@ namespace API.Controllers
     public HttpResponseMessage Getotherissuebill([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          delegate
+          func = () =>
           {
               DT = bll.Getsf_otherissuebill();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -351,7 +351,7 @@ namespace API.Controllers
     public HttpResponseMessage Getotherinwarehsbill([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          delegate
+          func = () =>
           {
               DT = bll.Getsf_otherinwarehsbill();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -363,7 +363,7 @@ namespace API.Controllers
     public HttpResponseMessage Getmoveinwarehsbill([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          delegate
+          func = () =>
           {
               DT = bll.Getsf_moveinwarehsbill();
               R = COMMON.StringHelper.JsonHelper(DT);
