@@ -17,6 +17,61 @@ namespace DAL
 
 
         #region  成员方法
+
+
+         
+
+        /// <summary>
+        /// 查询当前缺货的门店及对应缺货的名目
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetCurrOOSStoreNameDT()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("select * from e_view_shopGoodsName");
+            return DBHelp.OracleHelper.ExecuteDataTable(builder.ToString());
+
+        }
+
+
+        /// <summary>
+        /// 省份名称和客户数量 
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetProvinceCustomerSumDT()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("select * from e_view_ProvinceCustMer order by fqty desc");
+            return DBHelp.OracleHelper.ExecuteDataTable(builder.ToString());
+
+        }
+
+        /// <summary>
+        /// 增加当天新订单
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetTodayNewOrderDT()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("select * from  e_view_DaySale");
+            return DBHelp.OracleHelper.ExecuteDataTable(builder.ToString());
+
+        }
+
+
+        /// <summary>
+        /// 门店
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetStoreDT()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("select  substr(fname,1,2) as FCity,FName from  sf_t_dep");
+            return DBHelp.OracleHelper.ExecuteDataTable(builder.ToString());
+
+        }
+
+
         /// <summary>
         /// 当前库存金额数据（从高到低排序）
         /// </summary>

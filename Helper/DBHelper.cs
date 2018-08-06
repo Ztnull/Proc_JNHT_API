@@ -17,10 +17,10 @@ namespace DBHelp
                 string Strpwd;
                 string StrDataBase;
 
-                StrIP = "39.108.65.247";
+                StrIP = ".";
                 StrUID = "sa";
-                Strpwd = "sfkj123!1";
-                StrDataBase = "SF_EAS_ERP";   
+                Strpwd = "123";
+                StrDataBase = "YDDCRMOA";   
             
                return "server=" + StrIP + ";uid=" + StrUID + ";pwd=" + Strpwd + ";database=" + StrDataBase + "";
                Console.WriteLine(Strpwd);

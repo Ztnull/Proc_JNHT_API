@@ -35,5 +35,25 @@ namespace API.Controllers
         public void Delete(int id)
         {
         }
+
+        [HttpGet]
+        public void test()
+        {
+            int a = 3;
+            testLambda((a1,b) => { return a1+b; }, 1,1);
+            Func<int, int, string> getFunc = (p1, p2) =>
+            {
+                return p1 + "    " + p2;
+            };
+            getFunc.Invoke(1, 1);
+        }
+
+        
+        private void testLambda<T>(Func<int,int,T> func, int a,int b)
+        {
+            var def = default(T);
+            func.Invoke(a,b);
+        }
+
     }
 }

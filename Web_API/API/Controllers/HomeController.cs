@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net.Http;
@@ -32,6 +33,12 @@ namespace API.Controllers
                 state = 1;
             }
         }
+
+
+        /// <summary>
+        /// //加密钥匙
+        /// </summary>
+        private static string PrivateRsa = ConfigurationManager.AppSettings["PrivateKey"];
 
         /// <summary>
         /// 逻辑处理层
@@ -229,6 +236,77 @@ namespace API.Controllers
         }
 
 
+        /// <summary>
+        ///门店数据
+        /// </summary>
+        /// <param name="verCode"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public HttpResponseMessage GetStoreData([FromBody]Verification verCode)
+        {
+            return R = GetObjAction(verCode, state, () =>
+            {
+                DT = bll.GetStoreDT();
+                R = COMMON.StringHelper.JsonHelper(DT);
+                if (DT != null) DT.Clear();
+                return R;
+            });
+        }
+
+
+        /// <summary>
+        ///增加当天新订单
+        /// </summary>
+        /// <param name="verCode"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public HttpResponseMessage GetTodayNewOrderData([FromBody]Verification verCode)
+        {
+            return R = GetObjAction(verCode, state, () =>
+            {
+                DT = bll.GetTodayNewOrderDT();
+                R = COMMON.StringHelper.JsonHelper(DT);
+                if (DT != null) DT.Clear();
+                return R;
+            });
+        }
+
+
+
+        /// <summary>
+        ///省份名称和客户数量
+        /// </summary>
+        /// <param name="verCode"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public HttpResponseMessage GetProvinceCustomerSumData([FromBody]Verification verCode)
+        {
+            return R = GetObjAction(verCode, state, () =>
+            {
+                DT = bll.GetProvinceCustomerSumDT();
+                R = COMMON.StringHelper.JsonHelper(DT);
+                if (DT != null) DT.Clear();
+                return R;
+            });
+        }
+
+
+        /// <summary>
+        ///查询当前缺货的门店及对应缺货的名目
+        /// </summary>
+        /// <param name="verCode"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public HttpResponseMessage GetCurrOOSStoreNameData([FromBody]Verification verCode)
+        {
+            return R = GetObjAction(verCode, state, () =>
+            {
+                DT = bll.GetCurrOOSStoreNameDT();
+                R = COMMON.StringHelper.JsonHelper(DT);
+                if (DT != null) DT.Clear();
+                return R;
+            });
+        }
 
 
         /*********************************************Oracle 时间 ： 2018年7月30日*********************************************************/
@@ -410,7 +488,7 @@ namespace API.Controllers
             DateTime XiTongDate = DateTime.Now.AddSeconds(200);//获取系统当前时间+200s
 
 
-            string yanzheng = (md5(sb.Append("jnht2018").ToString())).ToLower();
+            string yanzheng = (md5(sb.Append(PrivateRsa).ToString())).ToLower();
             if (yanzheng == verCode.sign)
             {
                 #endregion

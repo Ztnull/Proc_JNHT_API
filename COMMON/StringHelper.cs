@@ -14,7 +14,7 @@ namespace COMMON
 
         #region dt转json
         /// <summary>
-        /// 将DataTable转化为Json
+        /// 将DataTable转化为HttpResponseMessage格式
         /// </summary>
         /// <param name="dtSoure"></param>
         /// <returns></returns>
@@ -23,7 +23,7 @@ namespace COMMON
             string json = string.Empty;
             string allPageResoult = string.Empty;
             if (dtSoure == null)
-            {
+            { 
                 allPageResoult = string.Concat(new object[] { "{\"code\":", 500, ",\"message\":", "请求成功！但查询出错", ",\"datas\":", json, "}" });
             }
             else

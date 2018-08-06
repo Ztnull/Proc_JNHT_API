@@ -11,6 +11,48 @@ namespace BLL
     public class ProcBLL
     {
         ProcSQLServerDAL dal = new ProcSQLServerDAL();
+
+
+
+
+        /// <summary>
+        /// 增加当天新订单
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetTodayNewOrderDT()
+        {
+            return dal.GetTodayNewOrderDT();
+        }
+
+        /// <summary>
+        /// 省份名称和客户数量 
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetProvinceCustomerSumDT()
+        {
+            return dal.GetProvinceCustomerSumDT();
+        }
+
+
+        /// <summary>
+        /// 查询当前缺货的门店及对应缺货的名目
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetCurrOOSStoreNameDT()
+        {
+            return dal.GetCurrOOSStoreNameDT();
+        }
+
+        /// <summary>
+        /// 门店
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetStoreDT()
+        {
+            return dal.GetStoreDT();
+        }
+
+
         /// <summary>
         /// 当前库存金额数据（从高到低排序）
         /// </summary>

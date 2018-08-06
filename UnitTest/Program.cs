@@ -11,8 +11,12 @@ namespace UnitTest
     {
         static void Main(string[] args)
         {
-            var reslut = OracleHelper.ExecuteDataTable(" select * from SF_DEPMENT ");
-            Console.WriteLine(reslut);
+            
+
+
+
+
+            Console.WriteLine("");
             Console.ReadKey();
         }
     }
