@@ -43,22 +43,21 @@ namespace API.Controllers
         /// <summary>
         /// 逻辑处理层
         /// </summary>
-        BLL.ProcBLL bll = new BLL.ProcBLL();
+        private BLL.ProcBLL bll = new BLL.ProcBLL();
 
         /// <summary>
         /// 数据容器
         /// </summary>
         private DataTable DT = new DataTable();
-        private delegate HttpResponseMessage delegateMessage();
         /// <summary>
         /// 响应返回体
         /// </summary>
-        HttpResponseMessage R = new HttpResponseMessage();
+        private HttpResponseMessage R = new HttpResponseMessage();
 
         /// <summary>
         /// stoken验证状态[Message:但状态为：1时，结束当前操作]
         /// </summary>
-        public int state { get; set; }
+        private int state { get; set; }
 
 
 
@@ -86,10 +85,7 @@ namespace API.Controllers
         {
             return R = GetObjAction(verCode, state, () =>
                      {
-                         DT = bll.Get12MonthSaleDT();
-                         R = COMMON.StringHelper.JsonHelper(DT);
-                         if (DT != null) DT.Clear();
-                         return R;
+                         return R = COMMON.StringHelper.JsonHelper(bll.Get12MonthSaleDT());
                      });
         }
 
@@ -105,10 +101,7 @@ namespace API.Controllers
         {
             return R = GetObjAction(verCode, state, () =>
                {
-                   DT = bll.GetbrandSaleDT();
-                   R = COMMON.StringHelper.JsonHelper(DT);
-                   if (DT != null) DT.Clear();
-                   return R;
+                   return R = COMMON.StringHelper.JsonHelper(bll.GetbrandSaleDT());
                });
         }
 
@@ -125,10 +118,7 @@ namespace API.Controllers
 
             return R = GetObjAction(verCode, state, () =>
            {
-               DT = bll.GetJSKCDT();
-               R = COMMON.StringHelper.JsonHelper(DT);
-               if (DT != null) DT.Clear();
-               return R;
+               return R = COMMON.StringHelper.JsonHelper(bll.GetJSKCDT());
            });
         }
 
@@ -144,10 +134,7 @@ namespace API.Controllers
         {
             return R = GetObjAction(verCode, state, () =>
            {
-               DT = bll.GetShopInDT();
-               R = COMMON.StringHelper.JsonHelper(DT);
-               if (DT != null) DT.Clear();
-               return R;
+               return R = COMMON.StringHelper.JsonHelper(bll.GetShopInDT());
            });
         }
 
@@ -162,10 +149,7 @@ namespace API.Controllers
 
             return R = GetObjAction(verCode, state, () =>
            {
-               DT = bll.GetShopSaleDT();
-               R = COMMON.StringHelper.JsonHelper(DT);
-               if (DT != null) DT.Clear();
-               return R;
+               return R = COMMON.StringHelper.JsonHelper(bll.GetShopSaleDT());
            });
         }
 
@@ -180,10 +164,7 @@ namespace API.Controllers
         {
             return R = GetObjAction<HttpResponseMessage>(verCode, state, () =>
            {
-               DT = bll.GetTypeSaleDT();
-               R = COMMON.StringHelper.JsonHelper(DT);
-               if (DT != null) DT.Clear();
-               return R;
+               return R = COMMON.StringHelper.JsonHelper(bll.GetTypeSaleDT());
            });
         }
 
@@ -210,10 +191,7 @@ namespace API.Controllers
         {
             return R = GetObjAction(verCode, state, () =>
             {
-                DT = bll.GetYearMonthLastDaySaleDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
+                return R = COMMON.StringHelper.JsonHelper(bll.GetYearMonthLastDaySaleDT());
             });
         }
 
@@ -228,10 +206,8 @@ namespace API.Controllers
         {
             return R = GetObjAction(verCode, state, () =>
                 {
-                    DT = bll.GetYearSaleDT();
-                    R = COMMON.StringHelper.JsonHelper(DT);
-                    if (DT != null) DT.Clear();
-                    return R;
+                    return R = COMMON.StringHelper.JsonHelper(bll.GetYearSaleDT());
+
                 });
         }
 
@@ -246,12 +222,11 @@ namespace API.Controllers
         {
             return R = GetObjAction(verCode, state, () =>
             {
-                DT = bll.GetStoreDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
+                return R = COMMON.StringHelper.JsonHelper(bll.GetStoreDT());
+
             });
         }
+
 
 
         /// <summary>
@@ -264,10 +239,7 @@ namespace API.Controllers
         {
             return R = GetObjAction(verCode, state, () =>
             {
-                DT = bll.GetTodayNewOrderDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
+                return COMMON.StringHelper.JsonHelper(bll.GetTodayNewOrderDT());
             });
         }
 
@@ -281,12 +253,22 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage GetProvinceCustomerSumData([FromBody]Verification verCode)
         {
+            //var sss = bll.GetProvinceCustomerSumDT();
+            //var newDt = (from p in sss.AsEnumerable()
+            //             select new
+            //             {
+            //                 FPROVINCENAME = p["FPROVINCENAME"],
+            //                 fqty = p["fqty"],
+            //             }).ToList();
+
+            //foreach (var item in newDt)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
             return R = GetObjAction(verCode, state, () =>
             {
-                DT = bll.GetProvinceCustomerSumDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
+                return R = COMMON.StringHelper.JsonHelper(bll.GetProvinceCustomerSumDT());
             });
         }
 
@@ -301,10 +283,7 @@ namespace API.Controllers
         {
             return R = GetObjAction(verCode, state, () =>
             {
-                DT = bll.GetCurrOOSStoreNameDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
+                return R = COMMON.StringHelper.JsonHelper(bll.GetCurrOOSStoreNameDT());
             });
         }
 
@@ -458,7 +437,10 @@ namespace API.Controllers
 
         public HttpResponseMessage GetObjAction<T>(Verification verCode, int state, Func<T> action)
         {
+            new Action(() =>
+            {
 
+            }).ExtendInvoke();
             if (state == 1)
             {
                 return Models.Error.ErrorModel(null, "stoken错误");
@@ -493,7 +475,7 @@ namespace API.Controllers
             {
                 #endregion
 
-                R = action.Invoke() as HttpResponseMessage;
+                R = action.ExtendInvoke() as HttpResponseMessage;
 
                 #region 验证代码
 
@@ -532,5 +514,46 @@ namespace API.Controllers
 
         #endregion
 
+    }
+
+
+    /// <summary>
+    /// 安全调用
+    /// </summary>
+    public static class DelegateExtend
+    {
+
+        /// <summary>
+        /// 启用泛型委托调用时 所做扩展，以此确保委托调用的安全性，线程的安全
+        /// 以及记录日志等逻辑操作
+        /// </summary>
+        /// <typeparam name="T">返回值类型</typeparam>
+        /// <param name="func">委托方法</param>
+        /// <returns></returns>
+        public static T ExtendInvoke<T>(this Func<T> func)
+        {
+            try
+            {
+                return func.Invoke();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return default(T);
+            }
+        }
+
+
+        public static void ExtendInvoke(this Action func)
+        {
+            try
+            {
+                func.Invoke();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

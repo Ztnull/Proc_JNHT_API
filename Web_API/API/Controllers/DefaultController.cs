@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -40,7 +41,7 @@ namespace API.Controllers
         public void test()
         {
             int a = 3;
-            testLambda((a1,b) => { return a1+b; }, 1,1);
+            testLambda((a1, b) => { return a1 + b; }, 1, 1);
             Func<int, int, string> getFunc = (p1, p2) =>
             {
                 return p1 + "    " + p2;
@@ -48,11 +49,18 @@ namespace API.Controllers
             getFunc.Invoke(1, 1);
         }
 
-        
-        private void testLambda<T>(Func<int,int,T> func, int a,int b)
+
+        DataTable dt = new DataTable();
+        public void test1()
+        {
+       
+        }
+
+
+        private void testLambda<T>(Func<int, int, T> func, int a, int b)
         {
             var def = default(T);
-            func.Invoke(a,b);
+            func.Invoke(a, b);
         }
 
     }

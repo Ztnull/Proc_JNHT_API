@@ -23,8 +23,8 @@ namespace COMMON
             string json = string.Empty;
             string allPageResoult = string.Empty;
             if (dtSoure == null)
-            { 
-                allPageResoult = string.Concat(new object[] { "{\"code\":", 500, ",\"message\":", "请求成功！但查询出错", ",\"datas\":", json, "}" });
+            {
+                allPageResoult = string.Concat(new object[] { "{\"code\":", 500, ",\"message\":", "\"请求成功！但查询出错\"", ",\"datas\":", "null", "}" });
             }
             else
             {
@@ -38,6 +38,32 @@ namespace COMMON
             };
         }
         #endregion
+
+
+
+
+        //private IEnumerable<TankReading> ConvertToTankReadings(DataTable dataTable)
+        //{
+        //    var tankReadings = new List<TankReading>();
+        //    foreach (DataRow row in dataTable.Rows)
+        //    {
+        //        var tankReading = new TankReading
+        //        {
+        //            TankReadingsID = Convert.ToInt32(row["TRReadingsID"]),
+        //            TankID = Convert.ToInt32(row["TankID"]),
+        //            ReadingDateTime = Convert.ToDateTime(row["ReadingDateTime"]),
+        //            ReadingFeet = Convert.ToInt32(row["ReadingFeet"]),
+        //            ReadingInches = Convert.ToInt32(row["ReadingInches"]),
+        //            MaterialNumber = row["MaterialNumber"].ToString(),
+        //            EnteredBy = row["EnteredBy"].ToString(),
+        //            ReadingPounds = Convert.ToDecimal(row["ReadingPounds"]),
+        //            MaterialID = Convert.ToInt32(row["MaterialID"]),
+        //            Submitted = Convert.ToBoolean(row["Submitted"]),
+        //        };
+        //        tankReadings.Add(tankReading);
+        //    }
+        //    return tankReadings.AsEnumerable();
+        //}
 
     }
 }
