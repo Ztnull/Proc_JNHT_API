@@ -437,10 +437,6 @@ namespace API.Controllers
 
         public HttpResponseMessage GetObjAction<T>(Verification verCode, int state, Func<T> action)
         {
-            new Action(() =>
-            {
-
-            }).ExtendInvoke();
             if (state == 1)
             {
                 return Models.Error.ErrorModel(null, "stoken错误");
