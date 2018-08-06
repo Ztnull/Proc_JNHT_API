@@ -41,8 +41,8 @@ namespace API.Controllers
         /// <summary>
         /// 数据容器
         /// </summary>
-        public DataTable DT = new DataTable();
-
+        private DataTable DT = new DataTable();
+        private delegate HttpResponseMessage delegateMessage();
         /// <summary>
         /// 响应返回体
         /// </summary>
@@ -77,13 +77,13 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage SaleAmount([FromBody]Verification verCode)
         {
-            return R = GetObjAction(verCode, state, func = () =>
-              {
-                  DT = bll.Get12MonthSaleDT();
-                  R = COMMON.StringHelper.JsonHelper(DT);
-                  if (DT != null) DT.Clear();
-                  return R;
-              });
+            return R = GetObjAction(verCode, state, () =>
+                     {
+                         DT = bll.Get12MonthSaleDT();
+                         R = COMMON.StringHelper.JsonHelper(DT);
+                         if (DT != null) DT.Clear();
+                         return R;
+                     });
         }
 
 
@@ -96,13 +96,13 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage SalesRatio([FromBody]Verification verCode)
         {
-            return R = GetObjAction(verCode, state, func = () =>
-            {
-                DT = bll.GetbrandSaleDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
-            });
+            return R = GetObjAction(verCode, state, () =>
+               {
+                   DT = bll.GetbrandSaleDT();
+                   R = COMMON.StringHelper.JsonHelper(DT);
+                   if (DT != null) DT.Clear();
+                   return R;
+               });
         }
 
 
@@ -116,13 +116,13 @@ namespace API.Controllers
         public HttpResponseMessage CurrInventoryData([FromBody]Verification verCode)
         {
 
-            return R = GetObjAction(verCode, state, func = () =>
-            {
-                DT = bll.GetJSKCDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
-            });
+            return R = GetObjAction(verCode, state, () =>
+           {
+               DT = bll.GetJSKCDT();
+               R = COMMON.StringHelper.JsonHelper(DT);
+               if (DT != null) DT.Clear();
+               return R;
+           });
         }
 
 
@@ -135,13 +135,13 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage StorePurchData([FromBody]Verification verCode)
         {
-            return R = GetObjAction(verCode, state, func = () =>
-            {
-                DT = bll.GetShopInDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
-            });
+            return R = GetObjAction(verCode, state, () =>
+           {
+               DT = bll.GetShopInDT();
+               R = COMMON.StringHelper.JsonHelper(DT);
+               if (DT != null) DT.Clear();
+               return R;
+           });
         }
 
         /// <summary>
@@ -153,13 +153,13 @@ namespace API.Controllers
         public HttpResponseMessage StoreSaleData([FromBody]Verification verCode)
         {
 
-            return R = GetObjAction(verCode, state, func = () =>
-            {
-                DT = bll.GetShopSaleDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
-            });
+            return R = GetObjAction(verCode, state, () =>
+           {
+               DT = bll.GetShopSaleDT();
+               R = COMMON.StringHelper.JsonHelper(DT);
+               if (DT != null) DT.Clear();
+               return R;
+           });
         }
 
 
@@ -171,18 +171,18 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage GetMachineTypeSaleData([FromBody]Verification verCode)
         {
-            return R = GetObjAction<HttpResponseMessage>(verCode, state, func = () =>
-            {
-                DT = bll.GetTypeSaleDT();
-                R = COMMON.StringHelper.JsonHelper(DT);
-                if (DT != null) DT.Clear();
-                return R;
-            });
+            return R = GetObjAction<HttpResponseMessage>(verCode, state, () =>
+           {
+               DT = bll.GetTypeSaleDT();
+               R = COMMON.StringHelper.JsonHelper(DT);
+               if (DT != null) DT.Clear();
+               return R;
+           });
         }
 
 
         #region 不使用此方法
-        //Func<HttpResponseMessage> func = new Func<HttpResponseMessage>(func = () => ()
+        //Func<HttpResponseMessage>  new Func<HttpResponseMessage>( () => ()
         //{
         //    BLL.ProcBLL bll = new BLL.ProcBLL();
         //    var DT = bll.GetYearMonthLastDaySaleDT();
@@ -201,13 +201,13 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage GetYearMonthLastDaySaleDate([FromBody]Verification verCode)
         {
-            return R = GetObjAction(verCode, state, func = () =>
-             {
-                 DT = bll.GetYearMonthLastDaySaleDT();
-                 R = COMMON.StringHelper.JsonHelper(DT);
-                 if (DT != null) DT.Clear();
-                 return R;
-             });
+            return R = GetObjAction(verCode, state, () =>
+            {
+                DT = bll.GetYearMonthLastDaySaleDT();
+                R = COMMON.StringHelper.JsonHelper(DT);
+                if (DT != null) DT.Clear();
+                return R;
+            });
         }
 
 
@@ -219,8 +219,7 @@ namespace API.Controllers
         [HttpPost]
         public HttpResponseMessage GetYearSaleData([FromBody]Verification verCode)
         {
-            return R = GetObjAction(verCode, state,
-                func = () =>
+            return R = GetObjAction(verCode, state, () =>
                 {
                     DT = bll.GetYearSaleDT();
                     R = COMMON.StringHelper.JsonHelper(DT);
@@ -229,6 +228,9 @@ namespace API.Controllers
                 });
         }
 
+
+
+
         /*********************************************Oracle 时间 ： 2018年7月30日*********************************************************/
         #region Oracle 时间 ： 2018年7月30日
         /*
@@ -236,7 +238,7 @@ namespace API.Controllers
     public HttpResponseMessage GetDEPMENT([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-            func = () =>
+             () =>
         {
             DT = bll.GetSF_DEPMENT();
             R = COMMON.StringHelper.JsonHelper(DT);
@@ -248,7 +250,7 @@ namespace API.Controllers
     public HttpResponseMessage Getitem([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          func = () =>
+           () =>
      {
          DT = bll.Getsf_item();
          R = COMMON.StringHelper.JsonHelper(DT);
@@ -261,7 +263,7 @@ namespace API.Controllers
     public HttpResponseMessage Getitem_type([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          func = () =>
+           () =>
           {
               DT = bll.Getsf_item_type();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -274,7 +276,7 @@ namespace API.Controllers
     public HttpResponseMessage Getcustomer([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          func = () =>
+           () =>
           {
               DT = bll.Getsf_customer();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -287,7 +289,7 @@ namespace API.Controllers
     public HttpResponseMessage Getsupplier([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          func = () =>
+           () =>
           {
               DT = bll.Getsf_supplier();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -299,7 +301,7 @@ namespace API.Controllers
     public HttpResponseMessage Getpurorder([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          func = () =>
+           () =>
           {
               DT = bll.Getsf_purorder();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -312,7 +314,7 @@ namespace API.Controllers
     public HttpResponseMessage Getsaleissuebill([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          func = () =>
+           () =>
           {
               DT = bll.Getsf_saleissuebill();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -325,7 +327,7 @@ namespace API.Controllers
     public HttpResponseMessage Getpurinwarehsbill([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          func = () =>
+           () =>
           {
               DT = bll.Getsf_purinwarehsbill();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -337,7 +339,7 @@ namespace API.Controllers
     public HttpResponseMessage Getotherissuebill([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          func = () =>
+           () =>
           {
               DT = bll.Getsf_otherissuebill();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -351,7 +353,7 @@ namespace API.Controllers
     public HttpResponseMessage Getotherinwarehsbill([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          func = () =>
+           () =>
           {
               DT = bll.Getsf_otherinwarehsbill();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -363,7 +365,7 @@ namespace API.Controllers
     public HttpResponseMessage Getmoveinwarehsbill([FromBody]Verification verCode)
     {
         return R = GetObjAction(verCode, state,
-          func = () =>
+           () =>
           {
               DT = bll.Getsf_moveinwarehsbill();
               R = COMMON.StringHelper.JsonHelper(DT);
@@ -405,10 +407,10 @@ namespace API.Controllers
 
             //判断请求是否超时
             long datetimes = Convert.ToInt64(verCode.datetime);//时间戳
-            DateTime XiTongDate = DateTime.Now.AddSeconds(200);//获取系统当前时间+30s
+            DateTime XiTongDate = DateTime.Now.AddSeconds(200);//获取系统当前时间+200s
 
-            //sign验证
-            string yanzheng = (md5(sb.Append("jnht2018").ToString())).ToLower();//用MD5[32]加密
+
+            string yanzheng = (md5(sb.Append("jnht2018").ToString())).ToLower();
             if (yanzheng == verCode.sign)
             {
                 #endregion

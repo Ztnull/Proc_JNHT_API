@@ -25,7 +25,7 @@ namespace DAL
         public DataTable GetJSKCDT()
         {
             Str = "";
-            Str = "select FShopName,round(FAmount,28) as FAmount ,remark,fcity from E_view_JSKC  order by  to_char(FAmount,'fm9999990.99')  desc";
+            Str = "select FShopName,round(FAmount,2) as FAmount ,remark,fcity from E_view_JSKC  order by  to_number(FAmount)  desc";
             return DBHelp.OracleHelper.ExecuteDataTable(Str);
 
         }
@@ -48,7 +48,7 @@ namespace DAL
         public DataTable GetTypeSaleDT()
         {
             Str = "";
-            Str = "select FTypeName,round(FAmount,28) as FAmount from E_view_TypeSale order by  to_char(FAmount,'fm9999990.99')  desc";
+            Str = "select FTypeName,round(FAmount,2) as FAmount from E_view_TypeSale order by  to_number(FAmount)  desc";
             return DBHelp.OracleHelper.ExecuteDataTable(Str);
         }
         /// <summary>
@@ -58,7 +58,7 @@ namespace DAL
         public DataTable GetbrandSaleDT()
         {
             Str = "";
-            Str = "select FbrandName,round(FAmount,28) as FAmount  from E_view_brandSale order by  to_char(FAmount,'fm9999990.99')  desc ";
+            Str = "select FbrandName,round(FAmount,2) as FAmount  from E_view_brandSale order by  to_number(FAmount)  desc ";
             return DBHelp.OracleHelper.ExecuteDataTable(Str);
         }
 
@@ -70,7 +70,7 @@ namespace DAL
         public DataTable GetShopSaleDT()
         {
             Str = "";
-            Str = "select FShopName,round(FAmount,28) as FAmount  from E_view_ShopSale order by  to_char(FAmount,'fm9999990.99')  desc";
+            Str = "select FShopName,round(FAmount,2) as FAmount  from E_view_ShopSale order by  to_number(FAmount)  desc";
             return DBHelp.OracleHelper.ExecuteDataTable(Str);
         }
 
@@ -82,7 +82,7 @@ namespace DAL
         public DataTable GetShopInDT()
         {
             Str = "";
-            Str = "select FShopName,round(FAmount,28) as FAmount  from E_view_ShopIn order by  to_char(FAmount,'fm9999990.99')  desc";
+            Str = "select FShopName,round(FAmount,2) as FAmount  from E_view_ShopIn order by  to_number(FAmount)  desc";
             return DBHelp.OracleHelper.ExecuteDataTable(Str);
         }
 
@@ -95,7 +95,7 @@ namespace DAL
         public DataTable Get12MonthSaleDT()
         {
             Str = "";
-            Str = " select FMonth,round(FAmount,28) as FAmount , round(FHBAmount,28)  as FHBAmount  from E_view_12MonthSaleDT order by  to_char(FHBAmount,'fm9999990.99')  desc ";
+            Str = " select FMonth,round(FAmount,2) as FAmount , round(FHBAmount,2)  as FHBAmount  from E_view_12MonthSaleDT order by  to_number(FAmount)  desc ";
             return DBHelp.OracleHelper.ExecuteDataTable(Str);
         }
 
